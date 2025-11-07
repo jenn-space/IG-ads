@@ -1,10 +1,10 @@
 # IG-ads
 Analyze the IG ad with the largest expected profit per impression / per user, provided the uplift relative to the runner-up and to control is meaningful (practically relevant) and statistically credible.
 
-Ad B produced the highest conversion rate and profit per user.
-After subtracting the $0.20 ad cost, Ad B’s expected profit per user exceeded Control by $0.03 (95 % CI [0.02, 0.04]).
-Ads A and C showed smaller or insignificant uplifts.
-Therefore, Ad B is recommended for deployment going forward.
+Recommendation:
+Based on observed conversions and revenue, Ad B should be prioritized in future Instagram campaigns.
+Using a multi-armed bandit could have reduced total sample size by nearly half, speeding learning while maintaining strong revenue performance.
+Future campaigns should consider a hybrid approach—initial randomization followed by adaptive allocation—to balance inference accuracy and profit maximization.
 
 ## Project Overview
 
@@ -43,7 +43,7 @@ The goal was to:
 
 ## Analytical Approach
 
-### 1️⃣ Data Preparation
+### Data Preparation
 - Load `IGAds.RData` and verify variable structure.  
 - Clean and recode variables for `Condition`, `Conversion`, and `Revenue`.  
 - Create a derived metric:  
@@ -53,21 +53,13 @@ The goal was to:
 To assess potential efficiency gains, a Thompson Sampling simulation was implemented using observed arm reward distributions.
 
 Simulation setup:
-
 Reward = Revenue – $0.20
-
 4 arms: Control, A, B, C
-
 100 000 total impressions
-
 Normal reward model with empirical means and variances
-
 200 Monte Carlo runs
 
 Metrics:
-
 Average impressions (pulls) per arm under bandit vs. uniform design
-
 Total cumulative reward and regret (difference from oracle and uniform)
-
 Estimate of sample size reduction for equivalent learning
